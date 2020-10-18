@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.UI.Services;
 using System.Threading.Tasks;
 using FluentEmail.Core;
+using FluentEmail.Core.Models;
 using FluentEmail.Mailgun;
 using Mailgun.Services;
 using Microsoft.Extensions.Options;
@@ -23,12 +24,12 @@ namespace Mailgun
                                                       mailgunRegion);
     }
 
-    /// <returns>A <see cref="Task"/> of type <see cref="Task&lt;SendResponse&gt;"/></returns>
+    /// <returns>A <see cref="Task"/> of type <see cref="Task"/>&lt;<see cref="SendResponse"/>&gt;</returns>
     public Task SendEmailAsync(string email, string subject, string message) =>
-      Email.From("noreply@lerbaek.dk")
-           .To(email)
-           .Subject(subject)
-           .Body(message)
+      Email.     From("noreply@lerbaek.dk")
+           .       To(email)
+           .  Subject(subject)
+           .     Body(message, true)
            .SendAsync();
 
     #region Validation
